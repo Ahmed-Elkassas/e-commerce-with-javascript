@@ -1,0 +1,103 @@
+@import url("https://fonts.googleapis.com/css?family=Lato:400,700");
+
+/* ----------------- General styles ---------------- */
+
+:root {
+  --mainColor: #9fc088;
+  --mainBlack: #221f20;
+  --darkgrey: #5b5b5f;
+  --grey: #ececec;
+  --lightgrey: #e2e2e2c9;
+  --white: #f5f4f4;
+  --details: #e8c07d;
+  --lightgold: #bcca3e;
+  --mainTransition: all 0.3s linear;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  color: var(--mainBlack);
+  background: var(--white);
+  font-family: "Lato", sans-serif;
+}
+/* ----------------- End of General styles ---------------- */
+/* --------------- Navbar ----------------------- */
+.navbar {
+  position: sticky;
+  top: 0;
+  height: 60px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background: var(--grey);
+  z-index: 10;
+}
+.navbar__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 86%;
+  margin: 0 auto;
+  user-select: none;
+}
+.navbar__logo {
+  font-size: 1.9rem;
+  font-weight: 800;
+}
+.navbar__logo span {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--lightgold);
+}
+.navbar__cart {
+  position: relative;
+  cursor: pointer;
+}
+.navbar__cart--items {
+  position: absolute;
+  top: -10px;
+  right: -11px;
+  background-color: var(--details);
+  padding: 2px 3px;
+  border-radius: 32%;
+  color: var(--white);
+}
+/* --------------- End of Navbar ---------------- */
+/* --------------- Hero ----------------------- */
+.hero {
+  min-height: calc(100vh - 60px);
+  background: url("../images/hero-bcg.jpeg") center/cover no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.banner {
+  background-color: rgba(255, 255, 2555, 0.8);
+  padding: 3rem;
+
+  text-align: center;
+}
+.banner__title {
+  font-size: 3rem;
+  margin-bottom: 2rem;
+}
+.banner__btn {
+  font-size: 1.4rem;
+  padding: 10px;
+  transition: var(--mainTransition);
+  background-color: var(--lightgold);
+  border: 2px solid var(--mainBlack);
+  border-radius: 3px;
+}
+.banner__btn:hover {
+  background-color: transparent;
+  border: 2px solid var(--lightgold);
+  color: #9eaa2d;
+}
+/* --------------- End of Hero ----------------------- */
