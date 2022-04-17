@@ -14,13 +14,11 @@
   --mainTransition: all 0.3s linear;
   --mainSpacing: 0.1rem;
 }
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
 body {
   color: var(--mainBlack);
   background: var(--white);
@@ -116,7 +114,7 @@ body {
   width: 90%;
   max-width: 86%;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   grid-column-gap: 1.5rem;
   grid-row-gap: 2rem;
 }
@@ -127,7 +125,7 @@ body {
 .product__container--img {
   display: block;
   width: 100%;
-  min-height: 12rem;
+  min-height: 1rem;
   transition: var(--mainTransition);
 }
 .product__container--btn {
@@ -144,11 +142,15 @@ body {
   transform: translateX(101%);
   cursor: pointer;
 }
+
 .product__container:hover .product__container--btn {
   transform: translateX(0);
 }
 .product__container:hover .product__container--img {
   opacity: 0.5;
+}
+.product__container--btn:hover {
+  color: var(--white);
 }
 .product__name,
 .product__price {
@@ -165,3 +167,51 @@ body {
   margin: 0 auto 1rem;
 }
 /* --------------- End of products ----------------------- */
+/* --------------- Cart -------------------------------- */
+.cart__overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  transform: var(--mainTransition);
+  background-color: #bcdda4af;
+  z-index: 12;
+  /* visibility: hidden; */
+}
+.cart {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+  z-index: 13;
+  background: rgb(231, 226, 221);
+  padding: 1.2rem;
+  /* transform: translate(100%); */
+}
+.cart__title {
+  margin: 1.2rem auto;
+  text-align: center;
+  letter-spacing: var(--mainSpacing);
+  text-transform: uppercase;
+}
+.cart__item {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-column-gap: 1.3rem;
+}
+.cart__item img {
+  width: 75px;
+  height: 75px;
+  max-width: 100%;
+  /* height: auto; */
+}
+@media screen and (min-width: 768px) {
+  .cart {
+    width: 30vw;
+    min-width: 450px;
+  }
+}
+/* --------------- End of Cart ------------------------- */
