@@ -79,7 +79,7 @@ body {
 .banner {
   background-color: rgba(255, 255, 2555, 0.8);
   padding: 3rem;
-
+  display: inline-block;
   text-align: center;
 }
 .banner__title {
@@ -201,6 +201,7 @@ body {
   display: grid;
   grid-template-columns: auto 1fr auto;
   grid-column-gap: 1.3rem;
+  margin-bottom: 1rem;
 }
 .cart__item img {
   width: 75px;
@@ -208,10 +209,46 @@ body {
   max-width: 100%;
   /* height: auto; */
 }
-@media screen and (min-width: 768px) {
+.cart__item--title {
+  font-size: 1.1rem;
+  letter-spacing: var(--mainSpacing);
+  text-transform: capitalize;
+}
+.cart__item--price {
+  font-size: 0.9rem;
+  letter-spacing: var(--mainSpacing);
+  margin: 0.4rem 0;
+}
+.cart__item--remove {
+  color: var(--darkgrey);
+  letter-spacing: var(--mainSpacing);
+  cursor: pointer;
+}
+.cart__item--icons i {
+  color: var(--lightgold);
+}
+.cart__item--icons p {
+  text-align: center;
+}
+/* --- cart footer ---- */
+.cart__footer {
+  text-align: center;
+  margin: 2rem auto;
+}
+.cart__footer h3 {
+  margin-bottom: 1rem;
+}
+.cart__btn--clear {
+  padding: 0.5rem 3rem;
+  border-width: 1px;
+  will-change: border-width;
+  transform: var(--mainTransition);
+}
+
+@media (min-width: 768px) {
   .cart {
     width: 30vw;
-    min-width: 450px;
+    min-width: 430px;
   }
 }
 /* --------------- End of Cart ------------------------- */
