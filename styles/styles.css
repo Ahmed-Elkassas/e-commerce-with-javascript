@@ -189,7 +189,13 @@ body {
   z-index: 13;
   background: rgb(231, 226, 221);
   padding: 1.2rem;
-  /* transform: translate(100%); */
+  /* transform: translateX(100%); */
+}
+.showcart {
+  transform: translateX(0);
+}
+.transparentBG {
+  visibility: visible;
 }
 .cart__title {
   margin: 1.2rem auto;
