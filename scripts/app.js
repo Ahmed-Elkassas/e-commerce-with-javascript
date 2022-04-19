@@ -1,3 +1,6 @@
+// variables
+const cartItemsAmount = document.querySelector(".navbar__cart--items");
+const cartTotalPrice = document.querySelector(".cart__footer h3 span");
 let cart = [];
 // Main classes
 
@@ -69,8 +72,20 @@ class UI {
         let cartItem = { ...Storage.getProduct(buttonId), amount: 1 };
         cart = [...cart, cartItem];
         Storage.saveCart(cart);
+        this.setCartValues(cart);
       });
     });
+  }
+  setCartValues(cart) {
+    let totalAmount = 0;
+    let totalPrice = 0;
+    cart.map((item) => {
+      totalAmount += item.amount;
+      totalPrice += item.price * item.amount;
+    });
+    cartItemsAmount.textContent = totalAmount;
+    cartTotalPrice.textContent = parseFloat(totalPrice.toFixed(2));
+    console.log(cartItemsAmount, cartTotalPrice);
   }
 }
 
