@@ -177,7 +177,7 @@ body {
   transform: var(--mainTransition);
   background-color: #bcdda4af;
   z-index: 12;
-  /* visibility: hidden; */
+  visibility: hidden;
 }
 .cart {
   position: fixed;
@@ -189,7 +189,7 @@ body {
   z-index: 13;
   background: rgb(231, 226, 221);
   padding: 1.2rem;
-  /* transform: translateX(100%); */
+  transform: translateX(100%);
 }
 .showcart {
   transform: translateX(0);
