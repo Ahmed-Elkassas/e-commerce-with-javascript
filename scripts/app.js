@@ -40,13 +40,20 @@ class UI {
   }
 }
 
-class Storage {}
+class Storage {
+  static saveProducts(products) {
+    localStorage.setItem("products", JSON.stringify(products));
+  }
+}
 
 class App {
   static init() {
     const ui = new UI();
     const products = new ProductList();
-    products.getProduct().then((products) => ui.displayProducts(products));
+    products.getProduct().then((products) => {
+      ui.displayProducts(products);
+      Storage.saveProducts(products);
+    });
   }
 }
 App.init();
