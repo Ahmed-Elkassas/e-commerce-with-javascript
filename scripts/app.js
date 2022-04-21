@@ -1,8 +1,36 @@
 // variables
+const productDOM = document.querySelector(".products__center");
 const cartItemsAmount = document.querySelector(".navbar__cart--items");
 const cartTotalPrice = document.querySelector(".cart__footer h3 span");
 let cart = [];
 // Main classes
+
+class ProductItem {
+  constructor(product) {
+    this.product = product;
+  }
+
+  render() {
+    const articalElement = document.createElement("article");
+    articalElement.className = "product";
+    articalElement.innerHTML = `
+            <div class="product__container">
+              <img
+                src="${this.product.imageUrl}"
+                alt="${this.product.title}"
+                class="product__container--img"
+              />
+              <button class="product__container--btn" data-id=${this.product.id}>
+                <i class="fa-solid fa-basket-shopping-simple"></i>
+                add to cart
+              </button>
+            </div>
+            <h4 class="product__name">${this.product.title}</h4>
+            <h5 class="product__price">$${this.product.price}</h5>
+      `;
+    return articalElement;
+  }
+}
 
 class ProductList {
   async getProduct() {
@@ -17,30 +45,13 @@ class ProductList {
   }
 }
 
-const productDOM = document.querySelector(".products__center");
 class UI {
   displayProducts(products) {
-    let uiResult = "";
-    products.forEach((product) => {
-      uiResult += `
-          <article class="product">
-            <div class="product__container">
-              <img
-                src="${product.imageUrl}"
-                alt="${product.title}"
-                class="product__container--img"
-              />
-              <button class="product__container--btn" data-id=${product.id}>
-                <i class="fa-solid fa-basket-shopping-simple"></i>
-                add to cart
-              </button>
-            </div>
-            <h4 class="product__name">${product.title}</h4>
-            <h5 class="product__price">$${product.price}</h5>
-          </article>
-      `;
-      productDOM.innerHTML = uiResult;
-    });
+    for (let product of products) {
+      const productItem = new ProductItem(product);
+      const productElement = productItem.render();
+      productDOM.append(productElement);
+    }
   }
   getCartButtons() {
     let buttons = document.querySelectorAll(".product__container--btn");
