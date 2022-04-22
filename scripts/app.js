@@ -2,6 +2,7 @@
 const productDOM = document.querySelector(".products__center");
 const cartItemsAmount = document.querySelector(".navbar__cart--items");
 const cartTotalPrice = document.querySelector(".cart__footer h3 span");
+const cartContent = document.querySelector(".cart__content");
 let cart = [];
 // Main classes
 
@@ -80,10 +81,11 @@ class UI {
          * [6] show the cart section
          */
         // add amount property because we will use it in cart section
-        let cartItem = { ...Storage.getProduct(buttonId), amount: 1 };
+        let cartItem = { ...Storage.getProductIdx(buttonId), amount: 1 };
         cart = [...cart, cartItem];
         Storage.saveCart(cart);
         this.setCartValues(cart);
+        this.addItemToCart(cartItem);
       });
     });
   }
@@ -98,13 +100,31 @@ class UI {
     cartTotalPrice.textContent = parseFloat(totalPrice.toFixed(2));
     console.log(cartItemsAmount, cartTotalPrice);
   }
+  addItemToCart(item) {
+    const divDOM = document.createElement("div");
+    divDOM.classList.add("cart__item");
+    divDOM.innerHTML = `
+      <img src="${item.imageUrl}" alt="product" />
+              <div>
+                <h4 class="cart__item--title">${item.title}</h4>
+                <h6 class="cart__item--price">$${item.price}</h6>
+                <span class="cart__item--remove" data-id=${item.id}>Remove</span>
+              </div>
+              <div class="cart__item--icons">
+                <i class="fa-solid fa-chevron-up" data-id=${item.id}></i>
+                <p class="cart__item--amount">2</p>
+                <i class="fa-solid fa-chevron-down" data-id=${item.id}></i>
+              </div>`;
+    cartContent.append(divDOM);
+    console.log(cartContent);
+  }
 }
 
 class Storage {
   static saveProducts(products) {
     localStorage.setItem("products", JSON.stringify(products));
   }
-  static getProduct(id) {
+  static getProductIdx(id) {
     let products = JSON.parse(localStorage.getItem("products"));
     return products.find((product) => product.id === id);
   }
