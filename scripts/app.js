@@ -3,6 +3,8 @@ const productDOM = document.querySelector(".products__center");
 const cartItemsAmount = document.querySelector(".navbar__cart--items");
 const cartTotalPrice = document.querySelector(".cart__footer h3 span");
 const cartContent = document.querySelector(".cart__content");
+const cartOverlay = document.querySelector(".cart__overlay");
+const cartDOM = document.querySelector(".cart");
 let cart = [];
 // Main classes
 
@@ -86,6 +88,7 @@ class UI {
         Storage.saveCart(cart);
         this.setCartValues(cart);
         this.addItemToCart(cartItem);
+        this.showCart();
       });
     });
   }
@@ -98,7 +101,7 @@ class UI {
     });
     cartItemsAmount.textContent = totalAmount;
     cartTotalPrice.textContent = parseFloat(totalPrice.toFixed(2));
-    console.log(cartItemsAmount, cartTotalPrice);
+    // console.log(cartItemsAmount, cartTotalPrice);
   }
   addItemToCart(item) {
     const divDOM = document.createElement("div");
@@ -116,7 +119,10 @@ class UI {
                 <i class="fa-solid fa-chevron-down" data-id=${item.id}></i>
               </div>`;
     cartContent.append(divDOM);
-    console.log(cartContent);
+  }
+  showCart() {
+    cartOverlay.classList.add("transparentBG");
+    cartDOM.classList.add("showcart");
   }
 }
 
