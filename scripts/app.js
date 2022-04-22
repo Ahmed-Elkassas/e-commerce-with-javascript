@@ -5,6 +5,8 @@ const cartTotalPrice = document.querySelector(".cart__footer h3 span");
 const cartContent = document.querySelector(".cart__content");
 const cartOverlay = document.querySelector(".cart__overlay");
 const cartDOM = document.querySelector(".cart");
+const closeCartBtn = document.querySelector(".cart__close");
+
 let cart = [];
 // Main classes
 
@@ -125,6 +127,13 @@ class UI {
     cartDOM.classList.add("showcart");
   }
 }
+
+// close cart section
+const closeCartHandler = () => {
+  cartOverlay.classList.remove("transparentBG");
+  cartDOM.classList.remove("showcart");
+};
+closeCartBtn.addEventListener("click", closeCartHandler);
 
 class Storage {
   static saveProducts(products) {

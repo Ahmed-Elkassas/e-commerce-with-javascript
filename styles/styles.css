@@ -197,6 +197,9 @@ body {
 .transparentBG {
   visibility: visible;
 }
+.cart__close {
+  cursor: pointer;
+}
 .cart__title {
   margin: 1.2rem auto;
   text-align: center;
