@@ -6,6 +6,7 @@ const cartContent = document.querySelector(".cart__content");
 const cartOverlay = document.querySelector(".cart__overlay");
 const cartDOM = document.querySelector(".cart");
 const closeCartBtn = document.querySelector(".cart__close");
+const cartBtn = document.querySelector(".navbar__cart--icon");
 
 let cart = [];
 // Main classes
@@ -126,14 +127,21 @@ class UI {
     cartOverlay.classList.add("transparentBG");
     cartDOM.classList.add("showcart");
   }
+  hideCart() {
+    cartOverlay.classList.remove("transparentBG");
+    cartDOM.classList.remove("showcart");
+  }
+  setUpAPP() {
+    cart = Storage.getCart();
+    this.setCartValues(cart);
+    this.populateCartItem(cart);
+    cartBtn.addEventListener("click", this.showCart);
+    closeCartBtn.addEventListener("click", this.hideCart);
+  }
+  populateCartItem() {
+    cart.forEach((item) => this.addItemToCart(item));
+  }
 }
-
-// close cart section
-const closeCartHandler = () => {
-  cartOverlay.classList.remove("transparentBG");
-  cartDOM.classList.remove("showcart");
-};
-closeCartBtn.addEventListener("click", closeCartHandler);
 
 class Storage {
   static saveProducts(products) {
@@ -157,6 +165,7 @@ class App {
   static init() {
     const ui = new UI();
     const products = new ProductList();
+    ui.setUpAPP();
     products
       .getProduct()
       .then((products) => {
