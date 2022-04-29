@@ -119,9 +119,9 @@ class UI {
                 <span class="cart__item--remove" data-id=${item.id}>Remove</span>
               </div>
               <div class="cart__item--icons">
-                <i class="fa-solid fa-chevron-up" data-id=${item.id}></i>
+                <i class="fa-solid fa-chevron-up cart__items--increase" data-id=${item.id}></i>
                 <p class="cart__item--amount">1</p>
-                <i class="fa-solid fa-chevron-down" data-id=${item.id}></i>
+                <i class="fa-solid fa-chevron-down cart__items--decrease" data-id=${item.id}></i>
               </div>`;
     cartContent.append(divDOM);
   }
@@ -151,6 +151,15 @@ class UI {
         let itemId = removeItem.dataset.id;
         cartContent.remove(cartContent.closest("cart__item"));
         this.removeItem(itemId);
+      } else if (event.target.classList.contains("cart__items--increase")) {
+        let addNewAmount = event.target;
+        let id = addNewAmount.dataset.id;
+        let tempItem = cart.find((item) => item.id === id);
+        // console.log(addNewAmount.nextElementSibling);
+        tempItem.amount = tempItem.amount + 1;
+        Storage.saveCart(cart);
+        this.setCartValues(cart);
+        addNewAmount.nextElementSibling.textContent = tempItem.amount;
       }
     });
   }
