@@ -10,6 +10,7 @@ const cartBtn = document.querySelector(".navbar__cart--icon");
 const clearCartBtn = document.querySelector(".cart__btn--clear");
 
 let cart = [];
+let buttonsArray = [];
 // Main classes
 
 class ProductItem {
@@ -62,7 +63,7 @@ class UI {
   }
   getCartButtons() {
     let buttons = document.querySelectorAll(".product__container--btn");
-    let buttonsArray = [...buttons];
+    buttonsArray = [...buttons];
     // console.log(buttonsArray);
     buttonsArray.forEach((button) => {
       let buttonId = button.dataset.id;
@@ -147,7 +148,22 @@ class UI {
   }
   clearCart() {
     let ItemsId = cart.map((item) => item.id);
-    ItemsId.forEach((id) => this.remove(id));
+    ItemsId.forEach((id) => this.removeItem(id));
+    while (cartContent.children.length > 0) {
+      cartContent.removeChild(cartContent.children[0]);
+    }
+    this.hideCart();
+  }
+  removeItem(id) {
+    cart = cart.filter((item) => item.id !== id);
+    this.setCartValues(cart);
+    Storage.saveCart(cart);
+    let button = this.getSingleButton(id);
+    button.disabled = false;
+    button.textContent = "Add to Cart";
+  }
+  getSingleButton(id) {
+    return buttonsArray.find((button) => button.dataset.id === id);
   }
 }
 
