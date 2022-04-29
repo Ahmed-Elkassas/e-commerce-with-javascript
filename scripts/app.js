@@ -160,6 +160,21 @@ class UI {
         Storage.saveCart(cart);
         this.setCartValues(cart);
         addNewAmount.nextElementSibling.textContent = tempItem.amount;
+      } else if (event.target.classList.contains("cart__items--decrease")) {
+        let decreaseOneAmount = event.target;
+        let id = decreaseOneAmount.dataset.id;
+        let tempItem = cart.find((item) => item.id === id);
+        tempItem.amount = tempItem.amount - 1;
+        if (tempItem.amount > 0) {
+          Storage.saveCart(cart);
+          this.setCartValues(cart);
+          decreaseOneAmount.previousElementSibling.innerText = tempItem.amount;
+        } else {
+          cartContent.removeChild(
+            decreaseOneAmount.parentElement.parentElement
+          );
+          this.removeItem(id);
+        }
       }
     });
   }
