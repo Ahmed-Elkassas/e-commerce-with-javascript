@@ -7,6 +7,7 @@ const cartOverlay = document.querySelector(".cart__overlay");
 const cartDOM = document.querySelector(".cart");
 const closeCartBtn = document.querySelector(".cart__close");
 const cartBtn = document.querySelector(".navbar__cart--icon");
+const clearCartBtn = document.querySelector(".cart__btn--clear");
 
 let cart = [];
 // Main classes
@@ -82,7 +83,7 @@ class UI {
          * [2] Add product to Cart array
          * [3] Save cart to the LocalStorage
          * [4] set cart value
-         * [5] display cart item
+         * [5] display cart item in cart section
          * [6] show the cart section
          */
         // add amount property because we will use it in cart section
@@ -118,7 +119,7 @@ class UI {
               </div>
               <div class="cart__item--icons">
                 <i class="fa-solid fa-chevron-up" data-id=${item.id}></i>
-                <p class="cart__item--amount">2</p>
+                <p class="cart__item--amount">1</p>
                 <i class="fa-solid fa-chevron-down" data-id=${item.id}></i>
               </div>`;
     cartContent.append(divDOM);
@@ -140,6 +141,13 @@ class UI {
   }
   populateCartItem() {
     cart.forEach((item) => this.addItemToCart(item));
+  }
+  cartLogic() {
+    clearCartBtn.addEventListener("click", this.clearCart.bind(this));
+  }
+  clearCart() {
+    let ItemsId = cart.map((item) => item.id);
+    ItemsId.forEach((id) => this.remove(id));
   }
 }
 
@@ -173,7 +181,10 @@ class App {
         Storage.saveProducts(products);
       })
       // add here to can access buttons after html code been loaded
-      .then(() => ui.getCartButtons());
+      .then(() => {
+        ui.getCartButtons();
+        ui.cartLogic();
+      });
   }
 }
 App.init();
